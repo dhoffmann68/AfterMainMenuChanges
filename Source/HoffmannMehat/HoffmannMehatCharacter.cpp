@@ -326,7 +326,7 @@ void AHoffmannMehatCharacter::TurnAtRate(float xRate)
 
 
 	// calculate delta for this frame from the rate information
-	AddControllerYawInput(finalXrate  * 1.25 * BaseTurnRate * GetWorld()->GetDeltaSeconds());
+	AddControllerYawInput(finalXrate  * BaseTurnRate * GetWorld()->GetDeltaSeconds());
 }
 
 void AHoffmannMehatCharacter::LookUpAtRate(float yRate)
@@ -377,7 +377,7 @@ void AHoffmannMehatCharacter::LookUpAtRate(float yRate)
 		}
 	}
 	// calculate delta for this frame from the rate information
-	AddControllerPitchInput(finalYrate * 1.25 * BaseLookUpRate * GetWorld()->GetDeltaSeconds());
+	AddControllerPitchInput(finalYrate * BaseLookUpRate * GetWorld()->GetDeltaSeconds());
 }
 
 bool AHoffmannMehatCharacter::EnableTouchscreenMovement(class UInputComponent* PlayerInputComponent)
