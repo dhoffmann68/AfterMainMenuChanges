@@ -53,16 +53,20 @@ protected:
 
 public:
 	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category=Camera)
+	UPROPERTY(BlueprintReadWrite, Category=Camera)
 	float BaseTurnRate;
 
 	/** Base look up/down rate, in deg/sec. Other scaling may affect final rate. */
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category=Camera)
+	UPROPERTY(BlueprintReadWrite, Category=Camera)
 	float BaseLookUpRate;
 
 	/** Gun muzzle's offset from the characters location */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Gameplay)
+	UPROPERTY(BlueprintReadWrite, Category=Gameplay)
 	FVector GunOffset;
+
+	UPROPERTY(BlueprintReadWrite, Category = Gameplay)
+	float DeadZone;
+
 
 	/** Projectile class to spawn */
 	UPROPERTY(EditDefaultsOnly, Category=Projectile)

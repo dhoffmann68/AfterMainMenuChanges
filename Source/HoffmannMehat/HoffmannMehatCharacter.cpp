@@ -26,6 +26,8 @@ AHoffmannMehatCharacter::AHoffmannMehatCharacter()
 	// set our turn rates for input
 	BaseTurnRate = 45.f;
 	BaseLookUpRate = 45.f;
+	DeadZone = 0.1f;
+
 
 	// Create a CameraComponent	
 	FirstPersonCameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("FirstPersonCamera"));
@@ -309,9 +311,7 @@ void AHoffmannMehatCharacter::TurnAtRate(float xRate)
 		magnitude = 1;
 	}
 
-	float tempDeadzone = 0.1f;
-
-	float activeRange = (magnitude - tempDeadzone) / (1 - tempDeadzone);
+	float activeRange = (magnitude - DeadZone) / (1 - DeadZone);
 	if (activeRange < 0)
 	{
 		activeRange = 0;
@@ -347,9 +347,8 @@ void AHoffmannMehatCharacter::LookUpAtRate(float yRate)
 		magnitude = 1;
 	}
 
-	float tempDeadzone = 0.1f;
 
-	float activeRange = (magnitude - tempDeadzone) / (1 - tempDeadzone);
+	float activeRange = (magnitude - DeadZone) / (1 - DeadZone);
 	if (activeRange < 0)
 	{
 		activeRange = 0;
