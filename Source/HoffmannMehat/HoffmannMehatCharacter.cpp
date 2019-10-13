@@ -691,7 +691,7 @@ void AHoffmannMehatCharacter::TurnAtRate(float xRate)
 	}
 	
 	
-	float activeRange = (xRate - DeadZone) / (1 - DeadZone);
+	float activeRange = (abs(xRate) - DeadZone) / (1 - DeadZone);
 	if (activeRange < 0)
 	{
 		activeRange = 0;
@@ -727,7 +727,7 @@ void AHoffmannMehatCharacter::TurnAtRate(float xRate)
 	float newYrate = sin(angle);
 	*/
 
-	float finalXrate = CalcXInputRate(abs(xRate)*100) * sign;
+	float finalXrate = CalcXInputRate(activeRange*100) * sign;
 
 
 	//FString log = FString::Printf(TEXT("%f: %f"), xRate, finalXrate);
@@ -773,7 +773,16 @@ void AHoffmannMehatCharacter::LookUpAtRate(float yRate)
 	float finalXrate = newXrate * activeRange;
 	*/
 	//float finalYrate = newYrate * activeRange; 
-	float finalYrate = CalcYInputRate(abs(yRate) * 100);
+
+
+	float activeRange = (abs(yRate) - DeadZone) / (1 - DeadZone);
+	if (activeRange < 0)
+	{
+		activeRange = 0;
+	}
+
+
+	float finalYrate = CalcYInputRate(activeRange * 100);
 
 	if (finalYrate < 0)
 	{
@@ -790,8 +799,8 @@ void AHoffmannMehatCharacter::LookUpAtRate(float yRate)
 		}
 	}
 
-	FString log = FString::Printf(TEXT("%f: %f"), yRate, finalYrate);
-	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, log);
+	//FString log = FString::Printf(TEXT("%f: %f"), yRate, finalYrate);
+	//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, log);
 
 	//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::SanitizeFloat(BaseLookUpRate));
 	// calculate delta for this frame from the rate information
