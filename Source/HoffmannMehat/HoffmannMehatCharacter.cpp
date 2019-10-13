@@ -281,18 +281,423 @@ void AHoffmannMehatCharacter::MoveRight(float Value)
 	}
 }
 
+
+
+
+
+float CalcXInputRate(float xRate)
+{	
+		
+		if (xRate > 97.26027397)
+		{
+			float t = (xRate - 97.26027397) / (100 - 97.26027397);
+			return  0.9634322954 + t * (1 - 0.9634322954);
+		}
+
+		if (xRate <= 4.109589041)
+		{
+			float t = xRate / 4.109589041;
+			return  t * 0.006498581106;
+		}
+		else if(xRate <= 6.849315068) //done
+		{
+			float t = (xRate - 4.109589041) / (6.849315068 - 4.109589041);
+			return 0.006498581106 + t * (0.01079688388 - 0.006498581106);
+
+		}
+		else if (xRate <= 9.589041096) //done
+		{
+			float t = (xRate - 6.849315068) / (9.589041096 - 6.849315068);
+			return 0.01079688388 + t * (0.0152762469 - 0.01079688388);
+		}
+		else if (xRate <= 12.32876712)//done
+		{
+			float t = (xRate - 9.589041096) / (12.32876712 - 9.589041096);
+			return 0.0152762469 + t * (0.02009211719 - 0.0152762469);
+		}
+		else if (xRate <= 15.06849315)
+		{
+			float t = (xRate - 12.32876712) / (15.06849315 - 12.32876712);
+			return 0.02009211719 + t * (0.02538589227 - 0.02009211719);
+		}
+		else if (xRate <= 17.80821918)
+		{
+			float t = (xRate - 15.06849315) / (17.80821918 - 15.06849315);
+			return 0.02538589227 + t * (0.03133758862 - 0.02538589227);
+		}
+		else if (xRate <= 20.54794521)
+		{
+			float t = (xRate - 17.80821918) / (20.54794521 - 17.80821918);
+			return 0.03133758862 + t * (0.03812320917 - 0.03133758862);
+		}
+		else if (xRate <= 23.28767123)
+		{
+			float t = (xRate - 20.54794521) / (23.28767123 - 20.54794521);
+			return 0.03812320917 + t * (0.04586507636 - 0.03812320917);
+		}
+		else if (xRate <= 26.02739726)
+		{
+			float t = (xRate - 23.28767123) / (26.02739726 - 23.28767123);
+			return 0.04586507636 + t * (0.05483206264 - 0.04586507636);
+		}
+		else if (xRate <= 28.76712329)
+		{
+			float t = (xRate - 26.02739726) / (28.76712329 - 26.02739726);
+			return 0.05483206264 + t * (0.06498803302 - 0.05483206264);
+		}
+		else if (xRate <= 31.50684932)
+		{
+			float t = (xRate - 28.76712329) / (31.50684932 - 28.76712329);
+			return 0.06498803302 + t * (0.07658435503 - 0.06498803302);
+		}
+		else if (xRate <= 34.24657534)
+		{
+			float t = (xRate - 31.50684932) / (34.24657534 - 31.50684932);
+			return 0.07658435503 + t * (0.0900202977 - 0.07658435503);
+		}
+		else if (xRate <= 36.98630137)
+		{
+			float t = (xRate - 34.24657534) / (36.98630137 - 34.24657534);
+			return 0.0900202977 + t * (0.1050284181 - 0.0900202977);
+		}
+		else if (xRate <= 39.7260274)
+		{
+			float t = (xRate - 36.98630137) / (39.7260274 - 36.98630137);
+			return 0.1050284181 + t * (0.1220418272 - 0.1050284181);
+		}
+		else if (xRate <= 42.46575342)
+		{
+			float t = (xRate - 39.7260274) / (42.46575342 - 39.7260274);
+			return 0.1220418272 + t * (0.1411820883 - 0.1220418272);
+		}
+		else if (xRate <= 45.20547945)
+		{
+			float t = (xRate - 42.46575342) / (45.20547945 - 42.46575342);
+			return 0.1411820883 + t * (0.1628917728 - 0.1411820883);
+		}
+		else if (xRate <= 47.94520548)
+		{
+			float t = (xRate - 45.20547945) / (47.94520548 - 45.20547945);
+			return 0.1628917728 + t * (0.1865012616 - 0.1628917728);
+		}
+		else if (xRate <= 50.68493151)
+		{
+			float t = (xRate - 47.94520548) / (50.68493151 - 47.94520548);
+			return 0.1865012616 + t * (0.212862971 - 0.1865012616);
+		}
+		else if (xRate <= 53.42465753)
+		{
+			float t = (xRate - 50.68493151) / (53.42465753 - 50.68493151);
+			return 0.212862971 + t * (0.2413386541 - 0.212862971);
+		}
+		else if (xRate <= 56.16438356)
+		{
+			float t = (xRate - 53.42465753) / (56.16438356 - 53.42465753);
+			return 0.2413386541 + t * (0.2703169443 - 0.2413386541);
+		}
+		else if (xRate <= 58.90410959)
+		{
+			float t = (xRate - 56.16438356) / (58.90410959 - 56.16438356);
+			return 0.2703169443 + t * (0.3015639166 - 0.2703169443);
+		}
+		else if (xRate <= 61.64383562)
+		{
+			float t = (xRate - 58.90410959) / (61.64383562 - 58.90410959);
+			return 0.3015639166 + t * (0.336835443 - 0.3015639166);
+		}
+		else if (xRate <= 64.38356164)
+		{
+			float t = (xRate - 61.64383562) / (64.38356164 - 61.64383562);
+			return 0.336835443 + t * (0.3670344828 - 0.336835443);
+
+		}
+		else if (xRate <= 67.12328767)
+		{
+			float t = (xRate - 64.38356164) / (67.12328767 - 64.38356164);
+			return 0.3670344828 + t * (0.4035792826 - 0.3670344828);
+		}
+		else if (xRate <= 69.8630137)
+		{
+			float t = (xRate - 67.12328767) / (69.8630137 - 67.12328767);
+			return 0.4035792826 + t * (0.4458033171 - 0.4035792826);
+		}
+		else if (xRate <= 72.60273973)
+		{
+			float t = (xRate - 69.8630137) / (72.60273973 - 69.8630137);
+			return 0.4458033171 + t * (0.4866852001 - 0.4458033171);
+		}
+		else if (xRate <= 75.34246575)
+		{
+			float t = (xRate - 72.60273973) / (75.34246575 - 72.60273973);
+			return 0.4866852001 + t * (0.5276097948 - 0.4866852001);
+		}
+		else if (xRate <= 78.08219178)
+		{
+			float t = (xRate - 75.34246575) / (78.08219178 - 75.34246575);
+			return 0.5276097948 + t * (0.5727014463 - 0.5276097948);
+		}
+		else if (xRate <= 80.82191781)
+		{
+			float t = (xRate - 78.08219178) / (80.82191781 - 78.08219178);
+			return 0.5727014463 + t * (0.622165069 - 0.5727014463);
+		}
+		else if (xRate <= 83.56164384)
+		{
+			float t = (xRate - 80.82191781) / (83.56164384 - 80.82191781);
+			return 0.622165069 + t * (0.6715457413 - 0.622165069);
+		}
+		else if (xRate <= 86.30136986)
+		{
+			float t = (xRate - 83.56164384) / (86.30136986 - 83.56164384);
+			return 0.6715457413 + t * (0.7253645904 - 0.6715457413);
+		}
+		else if (xRate <= 89.04109589)
+		{
+			float t = (xRate - 86.30136986) / (89.04109589 - 86.30136986);
+			return 0.7253645904 + t * (0.7785254535 - 0.7253645904);
+		}
+		else if (xRate <= 91.78082192)
+		{
+			float t = (xRate - 89.04109589) / (91.78082192 - 89.04109589);
+			return 0.7785254535 + t * (0.8395646001 - 0.7785254535);
+		}
+		else if (xRate <= 94.52054795)
+		{
+			float t = (xRate - 91.78082192) / (94.52054795 - 91.78082192);
+			return 0.8395646001 + t * (0.9016671185 - 0.8395646001);
+		}
+		else 
+		{
+			float t = (xRate - 94.52054795) / (97.26027397 - 94.52054795);
+			return 0.9016671185 + t * (0.9634322954 - 0.9016671185);
+		}
+		
+}
+
+
+
+
+
+float CalcYInputRate(float yRate)
+{
+
+	if (yRate > 97.26027397)
+	{
+		float t = (yRate - 97.26027397) / (100 - 97.26027397);
+		return  0.928047968 + t * (1 - 0.928047968);
+	}
+	//TODO: Special Case
+	if (yRate <= 4.109589041)
+	{
+		float t = yRate / 4.109589041;
+		return   t * 0.006258930096;
+	}
+	else if (yRate <= 6.849315068) //done
+	{
+		float t = (yRate - 4.109589041) / (6.849315068 - 4.109589041);
+		return 0.006258930096 + t * (0.01040934973 - 0.006258930096);
+
+	}
+	else if (yRate <= 9.589041096) //done
+	{
+		float t = (yRate - 6.849315068) / (9.589041096 - 6.849315068);
+		return 0.01040934973 + t * (0.01470324358 - 0.01040934973);
+	}
+	else if (yRate <= 12.32876712)//done
+	{
+		float t = (yRate - 9.589041096) / (12.32876712 - 9.589041096);
+		return 0.01470324358 + t * (0.01936120531 - 0.01470324358);
+	}
+	else if (yRate <= 15.06849315)
+	{
+		float t = (yRate - 12.32876712) / (15.06849315 - 12.32876712);
+		return 0.01936120531 + t * (0.02447423441 - 0.01936120531);
+	}
+	else if (yRate <= 17.80821918)
+	{
+		float t = (yRate - 15.06849315) / (17.80821918 - 15.06849315);
+		return 0.02447423441 + t * (0.03019137823 - 0.02447423441);
+	}
+	else if (yRate <= 20.54794521)
+	{
+		float t = (yRate - 17.80821918) / (20.54794521 - 17.80821918);
+		return 0.03019137823 + t * (0.03667623285 - 0.03019137823);
+	}
+	else if (yRate <= 23.28767123)
+	{
+		float t = (yRate - 20.54794521) / (23.28767123 - 20.54794521);
+		return 0.03667623285 + t * (0.04422503016 - 0.03667623285);
+	}
+	else if (yRate <= 26.02739726)
+	{
+		float t = (yRate - 23.28767123) / (26.02739726 - 23.28767123);
+		return 0.04422503016 + t * (0.05270127119 - 0.04422503016);
+	}
+	else if (yRate <= 28.76712329)
+	{
+		float t = (yRate - 26.02739726) / (28.76712329 - 26.02739726);
+		return 0.05270127119 + t * (0.06265743073 - 0.05270127119);
+	}
+	else if (yRate <= 31.50684932)
+	{
+		float t = (yRate - 28.76712329) / (31.50684932 - 28.76712329);
+		return 0.06265743073 + t * (0.07391096726 - 0.06265743073);
+	}
+	else if (yRate <= 34.24657534)
+	{
+		float t = (yRate - 31.50684932) / (34.24657534 - 31.50684932);
+		return 0.07391096726 + t * (0.08681291288 - 0.07391096726);
+	}
+	else if (yRate <= 36.98630137)
+	{
+		float t = (yRate - 34.24657534) / (36.98630137 - 34.24657534);
+		return 0.08681291288 + t * (0.1013975833 - 0.08681291288);
+	}
+	else if (yRate <= 39.7260274)
+	{
+		float t = (yRate - 36.98630137) / (39.7260274 - 36.98630137);
+		return 0.1013975833 + t * (0.1176818451 - 0.1013975833);
+	}
+	else if (yRate <= 42.46575342)
+	{
+		float t = (yRate - 39.7260274) / (42.46575342 - 39.7260274);
+		return 0.1176818451 + t * (0.1358759266 - 0.1176818451);
+	}
+	else if (yRate <= 45.20547945)
+	{
+		float t = (yRate - 42.46575342) / (45.20547945 - 42.46575342);
+		return 0.1358759266 + t * (0.1566929134 - 0.1358759266);
+	}
+	else if (yRate <= 47.94520548)
+	{
+		float t = (yRate - 45.20547945) / (47.94520548 - 45.20547945);
+		return 0.1566929134 + t * (0.1793716199 - 0.1566929134);
+	}
+	else if (yRate <= 50.68493151)
+	{
+		float t = (yRate - 47.94520548) / (50.68493151 - 47.94520548);
+		return 0.1793716199 + t * (0.2055178519 - 0.1793716199);
+	}
+	else if (yRate <= 53.42465753)
+	{
+		float t = (yRate - 50.68493151) / (53.42465753 - 50.68493151);
+		return 0.2055178519 + t * (0.2310116086 - 0.2055178519);
+	}
+	else if (yRate <= 56.16438356)
+	{
+		float t = (yRate - 53.42465753) / (56.16438356 - 53.42465753);
+		return 0.2310116086 + t * (0.2598395822 - 0.2310116086);
+	}
+	else if (yRate <= 58.90410959)
+	{
+		float t = (yRate - 56.16438356) / (58.90410959 - 56.16438356);
+		return 0.2598395822 + t * (0.2888243832 - 0.2598395822);
+	}
+	else if (yRate <= 61.64383562)
+	{
+		float t = (yRate - 58.90410959) / (61.64383562 - 58.90410959);
+		return 0.2888243832 + t * (0.322603057 - 0.2888243832);
+	}
+	else if (yRate <= 64.38356164)
+	{
+		float t = (yRate - 61.64383562) / (64.38356164 - 61.64383562);
+		return 0.322603057 + t * (0.3555385401 - 0.322603057);
+
+	}
+	else if (yRate <= 67.12328767)
+	{
+		float t = (yRate - 64.38356164) / (67.12328767 - 64.38356164);
+		return 0.3555385401 + t * (0.3899776036 - 0.3555385401);
+	}
+	else if (yRate <= 69.8630137)
+	{
+		float t = (yRate - 67.12328767) / (69.8630137 - 67.12328767);
+		return 0.3899776036 + t * (0.4307359307 - 0.3899776036);
+	}
+	else if (yRate <= 72.60273973)
+	{
+		float t = (yRate - 69.8630137) / (72.60273973 - 69.8630137);
+		return 0.4307359307 + t * (0.4683927371 - 0.4307359307);
+	}
+	else if (yRate <= 75.34246575)
+	{
+		float t = (yRate - 72.60273973) / (75.34246575 - 72.60273973);
+		return 0.4683927371 + t * (0.5041621426 - 0.4683927371);
+	}
+	else if (yRate <= 78.08219178)
+	{
+		float t = (yRate - 75.34246575) / (78.08219178 - 75.34246575);
+		return 0.5041621426 + t * (0.5580929487 - 0.5041621426);
+	}
+	else if (yRate <= 80.82191781)
+	{
+		float t = (yRate - 78.08219178) / (80.82191781 - 78.08219178);
+		return 0.5580929487 + t * (0.5991397849 - 0.5580929487);
+	}
+	else if (yRate <= 83.56164384)
+	{
+		float t = (yRate - 80.82191781) / (83.56164384 - 80.82191781);
+		return 0.5991397849 + t * (0.6326067212 - 0.5991397849);
+	}
+	else if (yRate <= 86.30136986)
+	{
+		float t = (yRate - 83.56164384) / (86.30136986 - 83.56164384);
+		return 0.6326067212 + t * (0.7103518613 - 0.6326067212);
+	}
+	else if (yRate <= 89.04109589)
+	{
+		float t = (yRate - 86.30136986) / (89.04109589 - 86.30136986);
+		return 0.7103518613 + t * (0.7546045504 - 0.7103518613);
+	}
+	else if (yRate <= 91.78082192)
+	{
+		float t = (yRate - 89.04109589) / (91.78082192 - 89.04109589);
+		return 0.7546045504 + t * (0.8056680162 - 0.7546045504);
+	}
+	else if (yRate <= 94.52054795)
+	{
+		float t = (yRate - 91.78082192) / (94.52054795 - 91.78082192);
+		return 0.8056680162 + t * (0.8822039265 - 0.8056680162);
+	}
+	else
+	{
+		float t = (yRate - 94.52054795) / (97.26027397 - 94.52054795);
+		return 0.8822039265 + t * (0.928047968 - 0.8822039265);
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
 /*
 TODO:	still using tempDeadzone variable
 
 */
 void AHoffmannMehatCharacter::TurnAtRate(float xRate)
 {
+	
 	float sign = 1;
 	if (xRate < 0)
 	{
 		sign = -1;
 	}
 	
+	
+	float activeRange = (xRate - DeadZone) / (1 - DeadZone);
+	if (activeRange < 0)
+	{
+		activeRange = 0;
+	}
+
+
 	/*
 	if (GEngine)
 	{
@@ -301,7 +706,7 @@ void AHoffmannMehatCharacter::TurnAtRate(float xRate)
 	}
 	*/
 	
-
+	/**
 	float yRate = InputComponent->GetAxisValue(TEXT("LookUpRate"));
 
 	float magnitude = sqrt((pow(xRate, 2) + pow(yRate, 2)));
@@ -320,11 +725,17 @@ void AHoffmannMehatCharacter::TurnAtRate(float xRate)
 	float angle = atan(yRate / xRate);
 	float newXrate = cos(angle);
 	float newYrate = sin(angle);
+	*/
 
-	float finalXrate = newXrate * activeRange * sign;
-	float finalYrate = newYrate * activeRange * sign;
+	float finalXrate = CalcXInputRate(abs(xRate)*100) * sign;
 
 
+	//FString log = FString::Printf(TEXT("%f: %f"), xRate, finalXrate);
+	//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, log);
+
+
+	//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::SanitizeFloat(finalXrate));
+	//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::SanitizeFloat(BaseTurnRate));
 	// calculate delta for this frame from the rate information
 	AddControllerYawInput(finalXrate  * BaseTurnRate * GetWorld()->GetDeltaSeconds());
 }
@@ -338,6 +749,7 @@ void AHoffmannMehatCharacter::LookUpAtRate(float yRate)
 		isNegative = 1;
 	}
 
+	/*
 	float xRate = InputComponent->GetAxisValue(TEXT("TurnRate"));
 
 	float magnitude = sqrt((pow(xRate, 2) + pow(yRate, 2)));
@@ -359,7 +771,9 @@ void AHoffmannMehatCharacter::LookUpAtRate(float yRate)
 	float newYrate = sin(angle);
 
 	float finalXrate = newXrate * activeRange;
-	float finalYrate = newYrate * activeRange;
+	*/
+	//float finalYrate = newYrate * activeRange; 
+	float finalYrate = CalcYInputRate(abs(yRate) * 100);
 
 	if (finalYrate < 0)
 	{
@@ -375,6 +789,11 @@ void AHoffmannMehatCharacter::LookUpAtRate(float yRate)
 			finalYrate *= -1;
 		}
 	}
+
+	FString log = FString::Printf(TEXT("%f: %f"), yRate, finalYrate);
+	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, log);
+
+	//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::SanitizeFloat(BaseLookUpRate));
 	// calculate delta for this frame from the rate information
 	AddControllerPitchInput(finalYrate * BaseLookUpRate * GetWorld()->GetDeltaSeconds());
 }
